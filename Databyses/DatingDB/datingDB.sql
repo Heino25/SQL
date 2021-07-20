@@ -210,5 +210,41 @@ VALUES (1, 1),
 (14, 1),
 (15, 11);
 
+SELECT * FROM contact_seeking
 INSERT INTO contact_seeking (contact_id, seeking_id)
-VALUES (, ),
+VALUES (1,1 ),
+(2,2),
+(3,1),
+(4,2),
+(5,1),
+(6,1),
+(7,1),
+(8,2),
+(9,2),
+(10,2),
+(11,2),
+(12,1),
+(13,1),
+(14,1),
+(15,1);
+
+
+SELECT 	
+my_contacts.last_name,my_contacts.first_name,
+profession.profession,
+status.status,
+zip_code.city,
+zip_code.province,
+seeking.seeking,
+interests.interests
+FROM my_contacts LEFT JOIN profession 
+ON my_contacts.prof_id = profession.prof_id
+LEFT JOIN status
+ON my_contacts.status_id = status.status_id
+LEFT JOIN zip_code
+ON my_contacts.zip_code = zip_code.zip_code
+LEFT JOIN seeking 
+ON my_contacts.contact_id= seeking.seeking_id
+LEFT JOIN interests
+ON my_contacts.contact_id= interests.interests_id
+ORDER BY  my_contacts;
