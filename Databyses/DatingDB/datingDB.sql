@@ -84,3 +84,33 @@ CREATE TABLE contact_seeking (
 );
 
 SELECT * FROM contact_seeking
+
+INSERT INTO profession (profession)
+VALUES ('Teacher'),
+('Engineer'),
+('Electrician'),
+('Musician'),
+('Personal Trainer'),
+('Software developer'),
+('IT'),
+('Retail');
+
+INSERT INTO zip_code (zip_code, city, province)
+VALUES (9300, 'Bloemfontein', 'Freestate'),
+(4000, 'KwaZulu-Natal', 'Durban'),
+(5000, 'Eastern Cape', 'East London'),
+(6000, 'Western Cape', 'Cape Town'),
+(2551, 'Gauteng', 'Vereenigin'),
+(3442, 'Northern Cape', 'Upington'),
+(4558, 'Limpopo', 'Polokwane'),
+(3441, 'North West', 'Klerksdorp'),
+(0095, 'Mpumalanga', 'Baberton'),
+(9301, 'Bloemfontein', 'Sasolburg'),
+(4001, 'KwaZulu-Natal', 'Amamzintoti'),
+(5001, 'Eastern Cape', 'George'),
+(6001, 'Western Cape', 'Stellenbosch'),
+(2553, 'Gauteng', 'Vanderbijl'),
+(3443, 'Northern Cape', 'Kanon Eiland'),
+(4559, 'Limpopo', 'Tzaneen'),
+(2553, 'North West', 'Potchefstroom'),
+(0094, 'Mpumalanga', 'Volksrust'),
