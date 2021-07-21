@@ -144,6 +144,10 @@ INSERT INTO seeking (seeking)
 VALUES ('Relationship'),
 ('Friendship');
 
+DELETE FROM seeking
+SELECT * FROM seeking
+
+
 INSERT INTO my_contacts (last_name, first_name, phone, email, gender, birthday, prof_id, zip_code, status_id)
 VALUES ('Sauer', 'JennySauer', '0872341234', 'jenny@gmail.com', 'F', '2000-01-05', 1, 9300, 1),
 ('Smith', 'Erin', '0835716666', 'erin@gmail.com', 'F', '1998-09-17', 2, 4000, 5),
@@ -214,20 +218,20 @@ SELECT * FROM contact_seeking
 INSERT INTO contact_seeking (contact_id, seeking_id)
 VALUES (1,1 ),
 (2,2),
-(3,1),
-(4,2),
-(5,1),
-(6,1),
-(7,1),
-(8,2),
-(9,2),
-(10,2),
-(11,2),
-(12,1),
-(13,1),
-(14,1),
-(15,1);
-
+(3,3),
+(4,4),
+(5,5),
+(6,6),
+(7,7),
+(8,8),
+(9,9),
+(10,10),
+(11,12),
+(12,11),
+(13,13),
+(14,14),
+(15,15);
+DELETE FROM contact_seeking
 
 SELECT 	
 my_contacts.last_name,my_contacts.first_name,
