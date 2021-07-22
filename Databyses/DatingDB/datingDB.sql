@@ -144,6 +144,7 @@ INSERT INTO seeking (seeking)
 VALUES ('Relationship'),
 ('Friendship');
 
+SELECT * FROM interests
 DELETE FROM seeking
 SELECT * FROM seeking
 
@@ -171,67 +172,41 @@ INSERT INTO contact_interests (contact_id, interests_id)
 VALUES (1, 1),
 (2, 2),
 (3, 3),
-(4, 3),
-(5, 4),
-(6, 5),
-(7, 6),
-(8, 7),
-(9, 8),
-(10, 9),
-(11, 10),
-(12, 11),
-(13, 12),
-(14, 13),
-(15, 11),
-(1, 1),
-(2, 2),
-(3, 3),
 (4, 4),
 (5, 5),
 (6, 6),
-(7, 8),
-(8, 7),
-(9, 11),
-(10, 5),
-(11, 10),
-(12, 1),
-(13, 2),
-(14, 8),
-(15, 12),
-(1, 3),
-(2, 13),
-(3, 6),
-(4, 7),
-(5, 12),
-(6, 10),
-(7, 8),
-(8, 2),
-(9, 4),
-(10, 9),
-(11, 6),
-(12, 3),
-(13, 5),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10),
+(11, 11),
+(12, 12),
+(13, 13),
 (14, 1),
-(15, 11);
+(15, 2);
 
-SELECT * FROM contact_seeking
+SELECT * FROM contact_interests
+DELETE FROM contact_interests
+
 INSERT INTO contact_seeking (contact_id, seeking_id)
 VALUES (1,1 ),
 (2,2),
-(3,3),
-(4,4),
-(5,5),
-(6,6),
-(7,7),
-(8,8),
-(9,9),
-(10,10),
-(11,12),
-(12,11),
-(13,13),
-(14,14),
-(15,15);
+(3,1),
+(4,2),
+(5,1),
+(6,2),
+(7,1),
+(8,2),
+(9,1),
+(10,2),
+(11,1),
+(12,2),
+(13,1),
+(14,2),
+(15,1);
+
 DELETE FROM contact_seeking
+SELECT * FROM contact_seeking
 
 SELECT 	
 my_contacts.last_name,my_contacts.first_name,
