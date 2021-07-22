@@ -117,6 +117,8 @@ VALUES (9300, 'Bloemfontein', 'Freestate'),
 (2553, 'North West', 'Potchefstroom'),
 (0094, 'Mpumalanga', 'Volksrust');
 
+SELECT * FROM zip_code
+
 INSERT INTO Status (status)
 VALUES ('Single'),
 ('Married'),
@@ -170,11 +172,11 @@ SELECT * FROM my_contacts
 
 INSERT INTO contact_interests (contact_id, interests_id)
 VALUES (1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
 (7, 7),
 (8, 8),
 (9, 9),
@@ -189,41 +191,56 @@ SELECT * FROM contact_interests
 DELETE FROM contact_interests
 
 INSERT INTO contact_seeking (contact_id, seeking_id)
+VALUES (2,99);
+
+INSERT INTO contact_seeking (contact_id, seeking_id)
 VALUES (1,1 ),
-(2,2),
+(2,1),
 (3,1),
-(4,2),
+(4,1),
 (5,1),
-(6,2),
+(6,1),
 (7,1),
-(8,2),
+(8,1),
 (9,1),
-(10,2),
+(10,1),
 (11,1),
-(12,2),
+(12,1),
 (13,1),
-(14,2),
+(14,1),
 (15,1);
 
 DELETE FROM contact_seeking
 SELECT * FROM contact_seeking
 
+SELECT * FROM my_contacts 
+--INNER JOIN profession
+--ON my_contacts.prof_id = profession.prof_id
+--INNER JOIN seeking
+--ON my_contacts.contact_id = seeking.seeking_id
+--INNER JOIN interests
+--ON my_contacts.contact_id = interests.interests_id
+INNER JOIN zip_code
+ON my_contacts.contact_id = zip_code.zip_code
+
 SELECT 	
 my_contacts.last_name,my_contacts.first_name,
 profession.profession,
 status.status,
-zip_code.city,
-zip_code.province,
+--zip_code.city,
+--zip_code.province,
 seeking.seeking,
 interests.interests
-FROM my_contacts LEFT JOIN profession 
+
+--SELECT *
+FROM my_contacts INNER JOIN profession 
 ON my_contacts.prof_id = profession.prof_id
-LEFT JOIN status
+INNER JOIN status
 ON my_contacts.status_id = status.status_id
-LEFT JOIN zip_code
-ON my_contacts.zip_code = zip_code.zip_code
-LEFT JOIN seeking 
-ON my_contacts.contact_id= seeking.seeking_id
-LEFT JOIN interests
-ON my_contacts.contact_id= interests.interests_id
+--INNER JOIN zip_code
+--ON my_contacts.zip_code = zip_code.zip_code
+INNER JOIN seeking 
+ON my_contacts.contact_id = seeking.seeking_id
+INNER JOIN interests
+ON my_contacts.contact_id = interests.interests_id
 ORDER BY  my_contacts;
