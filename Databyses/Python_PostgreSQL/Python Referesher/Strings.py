@@ -1,4 +1,6 @@
 name = "Bob"
-greeting = f"Hello, {name}"
+name1 = "Rolf"
+greeting = f"Hello, {name1}"
+with_name = greeting.format("Rolf")
 
-print(greeting)
+print(with_name)
