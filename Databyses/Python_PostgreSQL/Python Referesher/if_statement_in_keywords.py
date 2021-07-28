@@ -13,7 +13,7 @@ if user_input == "y":
     user_input = int(input("Guess our number: "))
     if user_input == number:
         print("You guessed correctly!")
-    elif abs(number - user_number) in (1, -1):
+    elif abs(number - user_input) in (1, -1):
         print("You were off by one.")
     else:
         print("Sorry, it's wrong!")
