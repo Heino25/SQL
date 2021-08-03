@@ -30,3 +30,5 @@ while (user_input := input(menu)) != "3":
         view_entries(get_entries())
     else:
         print("Invalid option, please try agian!")
+
+##
