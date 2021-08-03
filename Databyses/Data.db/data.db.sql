@@ -11,4 +11,4 @@ CREATE DATABASE "data.db"
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 	
-CREATE TABLE "users"
+CREATE TABLE users (first_name TEXT, surname TEXT);
