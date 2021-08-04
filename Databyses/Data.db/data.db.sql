@@ -12,3 +12,5 @@ CREATE DATABASE "data.db"
     CONNECTION LIMIT = -1;
 	
 CREATE TABLE users (first_name TEXT, surname TEXT);
+
+INSERT INTO users VALUES ('ROLF', 'SMITH');
