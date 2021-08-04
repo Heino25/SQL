@@ -14,3 +14,5 @@ CREATE DATABASE "data.db"
 CREATE TABLE users (first_name TEXT, surname TEXT);
 
 INSERT INTO users VALUES ('ROLF', 'SMITH');
+
+SELECT * FROM users;
