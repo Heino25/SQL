@@ -18,3 +18,5 @@ INSERT INTO users VALUES ('ROLF', 'SMITH');
 SELECT * 
 FROM users
 WHERE surname != 'Smith';
+
+DROP TABLE IF EXISTS users;
