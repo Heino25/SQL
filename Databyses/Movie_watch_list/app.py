@@ -36,7 +36,7 @@ def prompt_watch_movie():
     movie_title = input("Enter movie title you've watched: ")
     database.watch_movie(movie_title)
 
-
+#
 print(welcome)
 database.create_tables()
 
