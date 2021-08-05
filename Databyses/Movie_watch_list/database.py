@@ -2,32 +2,32 @@ import datetime
 import sqlite3
 
 CREATE_MOVIES_TABLE = """CREATE TABLE IF NOT EXISTS movies (
-    tile TEXT,
+    title TEXT,
     release_timestamp REAL,
     watched INTEGER
 );"""
 
-INSERT_MOVIES = "INSERT INTO movies (title, release_timestamp, watched) VALUES (7, 7, 0);"
+INSERT_MOVIE = "INSERT INTO movies (title, release_timestamp, watched) VALUES (?, ?, 0);"
 SELECT_ALL_MOVIES = "SELECT * FROM movies;"
 SELECT_UPCOMING_MOVIES = "SELECT * FROM movies WHERE release_timestamp > ?;"
+SET_MOVIE_WATCHED = "UPDATE movies SET watched = 1 WHERE title = ?;"
 SELECT_WATCHED_MOVIES = "SELECT * FROM movies WHERE watched = 1;"
-SET_MOVIES_WATCHED = "UPDATE movies SET watched = 1 WHERE title = ?;"
 
 connection = sqlite3.connect("data.db")
 
 
-def create_table():
+def create_tables():
     with connection:
         connection.execute(CREATE_MOVIES_TABLE)
 
 
-def add_movies(title, release_timestamp):
+def add_movie(content, release_timestamp):
     with connection:
-        connection.execute(INSERT_MOVIES, (title, release_timestamp))
+        connection.execute(INSERT_MOVIE, (content, release_timestamp))
 
 
 def get_movies(upcoming=False):
-    with connection:
+    with sqlite3.connect("data.db") as connection:
         cursor = connection.cursor()
         if upcoming:
             today_timestamp = datetime.datetime.today().timestamp()
@@ -37,9 +37,9 @@ def get_movies(upcoming=False):
         return cursor.fetchall()
 
 
-def watch_movies(title):
+def watch_movie(movie_title):
     with connection:
-        cursor = connection.execute(SET_MOVIE_WATCHED, (title,))
+        connection.execute(SET_MOVIE_WATCHED, (movie_title,))
 
 
 def get_watched_movies():
