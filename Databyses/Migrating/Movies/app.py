@@ -16,7 +16,7 @@ Your selection: """
 welcome = "Welcome to the watchlist app!"
 
 print(welcome)
-# database.create_tables()
+database.create_tables()
 
 def prompt_add_movie():
 	title = input("Movie title: ")
@@ -52,8 +52,7 @@ def prompt_search_movies():
 	movies = database.search_movies(search_term)
 	if movies:
 		print_movie_list("Movies found: ", movies)
-	else:
-		print("Found no movies for that search term!")
+	else:print("Found no movies for that search term!")
 
 def prompt_add_user():
 	username = input("Username: ")

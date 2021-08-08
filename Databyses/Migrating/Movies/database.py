@@ -23,18 +23,18 @@ CREATE_WATCHED_TABLE = """CREATE TABLE IF NOT EXISTS watched (
 	FOREIGN KEY(movie_id) REFERENCES movies(id)
 );"""
 
-INSERT_MOVIES = "INSERT INTO movies (title, release_timestamp) VALUES (%S, %S);"
-INSERT_USER = "INSERT INTO users (username) VALUES (%S)"
-DELETE_MOVIE = "DELETE FROM movies WHERE title = ?;"
+INSERT_MOVIES = "INSERT INTO movies (title, release_timestamp) VALUES (%s, %s);"
+INSERT_USER = "INSERT INTO users (username) VALUES (%s)"
+DELETE_MOVIE = "DELETE FROM movies WHERE title = %s;"
 SELECT_ALL_MOVIES = "SELECT * FROM movies;"
-SELECT_UPCOMING_MOVIES = "SELECT * FROM movies WHERE release_timestamp > %S;"
+SELECT_UPCOMING_MOVIES = "SELECT * FROM movies WHERE release_timestamp > %s;"
 SELECT_WATCHED_MOVIES = """SELECT movies.* FROM movies
 JOIN watched ON movies.id = watched.movie_id
 JOIN users ON users.username = watched.user_username
-WHERE users.username = ?;"""
-INSERT_WATCHED_MOVIE = "INSERT INTO watched (user_username, movie_id) VALUES (%S, %S)"
-SET_MOVIE_WATCHED = "UPDATE movies SET watched = 1 WHERE title = %S;"
-SEARCH_MOVIES = "SELECT * FROM movies WHERE title LIKE %S;"
+WHERE users.username = %s;"""
+INSERT_WATCHED_MOVIE = "INSERT INTO watched (user_username, movie_id) VALUES (%s, %s)"
+SET_MOVIE_WATCHED = "UPDATE movies SET watched = 1 WHERE title = %s;"
+SEARCH_MOVIES = "SELECT * FROM movies WHERE title LIKE %s"
 CREATE_RELEASE_INDEX = "CREATE INDEX IF NOT EXISTS idx_movies_release ON movies(release_timestamp);"
 
 connection = psycopg2.connect(os.environ["DATABASE_URL"])
@@ -42,6 +42,7 @@ connection = psycopg2.connect(os.environ["DATABASE_URL"])
 def create_tables():
 	with connection:
 		with connection.cursor() as cursor:
+			cursor.execute(CREATE_MOVIES_TABLE)
 			cursor.execute(CREATE_USERS_TABLE)
 			cursor.execute(CREATE_WATCHED_TABLE)
 			cursor.execute(CREATE_RELEASE_INDEX)
@@ -80,7 +81,6 @@ def watch_movie(username, movie_id):
 def get_watched_movies(username):
 	with connection:
 		with connection.cursor() as cursor:
-			cursor.execute(SELECT_WATCHED_MOVIES, (username,))
+			cursor.execute(SELECT_WATCHED_MOVIES,(username,))
 			return cursor.fetchall()
-
 ##
