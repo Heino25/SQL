@@ -16,7 +16,7 @@ Your selection: """
 welcome = "Welcome to the watchlist app!"
 
 print(welcome)
-database.create_tables()
+# database.create_tables()
 
 def prompt_add_movie():
 	title = input("Movie title: ")
