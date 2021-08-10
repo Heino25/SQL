@@ -99,3 +99,5 @@ def add_poll_vote(connection, username: str, option_id: int):
     with connection:
         with connection.cursor() as cursor:
             cursor.execute(INSERT_VOTE, (username, option_id))
+
+##
