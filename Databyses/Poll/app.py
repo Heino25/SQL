@@ -1,4 +1,5 @@
 import os
+from typing import List
 import psycopg2
 from psycopg2.errors import DivisionByZero
 from dotenv import load_dotenv
@@ -6,16 +7,16 @@ import database
 
 
 DATABASE_PROMPT = "Enter the DATABASE_URI value or leave empty to load from .env file: "
-MENU_PROMPT = """-- Menu --
 
+MENU_PROMPT = """-- Menu --
 1) Create new poll
 2) List open polls
 3) Vote on a poll
 4) Show poll votes
 5) Select a random winner from a poll option
 6) Exit
-
 Enter your choice: """
+
 NEW_OPTION_PROMPT = "Enter new option text (or leave empty to stop adding options): "
 
 
@@ -33,8 +34,8 @@ def prompt_create_poll(connection):
 def list_open_polls(connection):
     polls = database.get_polls(connection)
 
-    for _id, title, owner in polls:
-        print(f"{_id}: {title} (created by {owner})")
+    for poll in polls:
+        print(f"{poll[0]}: {poll[1]} (created by {poll[2]})")
 
 
 def prompt_vote_poll(connection):
@@ -48,7 +49,7 @@ def prompt_vote_poll(connection):
     database.add_poll_vote(connection, username, option_id)
 
 
-def _print_poll_options(poll_with_options):
+def _print_poll_options(poll_with_options: List[database.PollWithOption]):
     for option in poll_with_options:
         print(f"{option[3]}: {option[4]}")
 
@@ -56,13 +57,12 @@ def _print_poll_options(poll_with_options):
 def show_poll_votes(connection):
     poll_id = int(input("Enter poll you would like to see votes for: "))
     try:
-        # This gives us count and percentage of votes for each option in a poll
         poll_and_votes = database.get_poll_and_vote_results(connection, poll_id)
     except DivisionByZero:
         print("No votes yet cast for this poll.")
     else:
-        for _id, option_text, count, percentage in poll_and_votes:
-            print(f"{option_text} got {count} votes ({percentage:.2f}% of total)")
+        for result in poll_and_votes:
+            print(f"{result[1]} got {result[2]} votes ({result[3]:.2f}% of total)")
 
 
 def randomize_poll_winner(connection):
