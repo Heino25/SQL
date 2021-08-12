@@ -1,6 +1,6 @@
 from typing import List
 from connection_pool import pool
-from models.option import Option
+from model.option import Option
 import database
 
 
