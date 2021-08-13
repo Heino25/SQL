@@ -1,9 +1,10 @@
 from typing import List
 import random
+
 import database
-from connection_pool import pool
-from model.option import Option
-from model.poll import Poll
+from connection_pool import get_connection
+from models.option import Option
+from models.poll import Poll
 
 
 MENU_PROMPT = """-- Menu --
@@ -60,6 +61,7 @@ def show_poll_votes():
     try:
         for option, votes in zip(options, votes_per_option):
             percentage = votes / total_votes * 100
+            percentage = votes / total_votes * 100
             print(f"{option.text} for {votes} ({percentage:.2f}% of total)")
     except ZeroDivisionError:
         print("No votes yet cast for this poll.")
@@ -86,9 +88,8 @@ MENU_OPTIONS = {
 
 
 def menu():
-    connection = pool.getconn()
-    database.create_tables(connection)
-    pool.putconn(connection)
+    with get_connection() as connection:
+        database.create_tables(connection)
 
     while (selection := input(MENU_PROMPT)) != "6":
         try:
