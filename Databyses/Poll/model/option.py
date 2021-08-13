@@ -1,7 +1,6 @@
 from typing import List
 import datetime
 import pytz
-
 from connection_pool import get_connection
 import database
 
