@@ -1,9 +1,6 @@
 from typing import List
-from connection_pool import pool
-from model.option import Option
-import database
 
-from typing import List
+import psycopg2
 
 from connection_pool import get_connection
 from models.option import Option

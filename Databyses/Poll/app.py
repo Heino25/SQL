@@ -4,8 +4,8 @@ import datetime
 import pytz
 import database
 from connection_pool import get_connection
-from models.option import Option
-from models.poll import Poll
+from model.option import Option
+from model.poll import Poll
 
 MENU_PROMPT = """-- Menu --
 
