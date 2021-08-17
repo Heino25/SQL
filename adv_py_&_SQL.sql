@@ -83,5 +83,37 @@ WHERE opened_ago(email_opens) < 17509903;
 
 --SELECT * FROM users WHERE email = 'rolf@example.com' FOR UPDATE;
 
+---------------------------------------------------------------------------------------------------------------------------
+-- Passing arguments
+SELECT * FROM users WHERE name = %s;
+-----------------------------------------------------------------------------------------------------------------------------
+-- Using SQL String Composition
+
+from psycopg2 import sql
+
+table_name = input('Enter table you want to search in: ')
+column_name = input('Enter column you want to search by: ')
+search_value = input('Enter what value youre looking for: ')
+
+query = sql.SQL("SELECT * FROM {table} WHERE {column} = %s;")
+query = query.format(
+	table=sql.Identifier(table_name),
+	column=sql.Identifier(column_name)
+)
+
+--Pass variable fields to a query
+fields_csv = input("Enter fields you wish to retrieve, seperated by commas: ")
+fields = fields_csv.strip().split(",")
+sql_fields = [sql.Identifier(field) for field in fields]
+
+query = sql.SQL("SELECT {fields} FROM users;")
+query = query.format(
+	fields=sql.SQL(",").join(sql_fields)
+)
+
+--Other modules classes
+--sql.Identifier used for tables and columns
+--sql.Literal used for values hardcoded in query 
+--sql.Placeholder for values to be passed later (or %s can be used instead)
 
 
