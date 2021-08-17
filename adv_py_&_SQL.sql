@@ -70,3 +70,18 @@ $$ LANGUAGE SQL;
 SELECT *, opened_ago(email_opens) FROM users
 JOIN email_opens ON users_id = email_opens.user_id
 WHERE opened_ago(email_opens) < 17509903;
+
+
+-----------------------------------------------------------------------------------------------------------------------
+--Not recomended, it can become dangerous in  larger databases.
+
+--Manual table-level locking
+
+--LOCK TABLE users IN SHARE UPDATE EXCLUSIVE MODE;
+
+--Row-level locking
+
+--SELECT * FROM users WHERE email = 'rolf@example.com' FOR UPDATE;
+
+
+
