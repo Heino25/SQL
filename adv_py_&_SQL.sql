@@ -65,13 +65,16 @@ INSERT INTO email_opens VALUES (3, 2, 1572393600),
 
 SELECT * FROM email_opens JOIN users on email_opens.user_id = users.id;
 
-CREATE OR REPLACE FUNCTION opened_ago(email_open_row email_opens) RETURNS INT AS $$
-	SELECT cast(extract(epoch FROM CURRENT_TIMESTAMP) AS INT) email_open_row.opened_time AS email_opened_ago;
+CREATE OR REPLACE FUNCTION opened_ago(email_open_row email_opens) RETURNS INTEGER AS $$
+    SELECT cast(extract(epoch FROM CURRENT_TIMESTAMP) AS INTEGER) - email_open_row.opend_time AS email_opened_ago;
 $$ LANGUAGE SQL;
 
 SELECT *, opened_ago(email_opens) FROM users
-JOIN email_opens ON users_id = email_opens.user_id
-WHERE opened_ago(email_opens) < 17509903;
+JOIN email_opens ON users.id = email_opens.user_id
+WHERE opened_ago(email_opens) < 70000000;
+SELECT * FROM users;
+SELECT * FROM emails;
+SELECT * FROM email_opens;
 
 DROP FUNCTION opened_ago;
 -----------------------------------------------------------------------------------------------------------------------
