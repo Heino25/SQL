@@ -33,6 +33,8 @@ DROP FUNCTION delete_inactive(NUMERIC);
 -----------------------------------------------------------------------------------
 
 DROP TABLE users
+DROP TABLE emails
+DROP TABLE email_opens
 
 CREATE TABLE users (id int PRIMARY KEY, name TEXT, email TEXT);
 CREATE TABLE emails (id int PRIMARY KEY, name TEXT, content TEXT);
@@ -71,7 +73,7 @@ SELECT *, opened_ago(email_opens) FROM users
 JOIN email_opens ON users_id = email_opens.user_id
 WHERE opened_ago(email_opens) < 17509903;
 
-
+DROP FUNCTION opened_ago;
 -----------------------------------------------------------------------------------------------------------------------
 --Not recomended, it can become dangerous in  larger databases.
 
