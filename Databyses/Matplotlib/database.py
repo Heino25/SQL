@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SELECT_POLLS = "SELECT * FROM polls;"
-SELECT_OPTIONS_IN_POLL = """SELECT options.option_text, SUM(votes.option_id) FROM options
+SELECT_OPTIONS_IN_POLL = """
+SELECT options.option_text, SUM(votes.option_id) FROM options
 JOIN polls ON options.poll_id = polls.id
 JOIN votes ON options.id = votes.option_id
 WHERE polls.id = %s
