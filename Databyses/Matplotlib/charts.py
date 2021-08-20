@@ -26,5 +26,6 @@ def create_bar_chart(polls):
         [poll[1] for poll in polls],
         tick_label=[poll[0] for poll in polls]
     )
+    plt.xticks(rotation=30, ha="right")
 
     return figure
